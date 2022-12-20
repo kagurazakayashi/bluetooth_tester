@@ -16,9 +16,17 @@ namespace BluetoothTester
 {
     public partial class Form1 : Form
     {
+        BluetoothClient client = new BluetoothClient(); // 藍芽庫
+        BluetoothRadio radio = null; // 藍芽裝置
+        IReadOnlyCollection<BluetoothDeviceInfo> devices = null;
+        BluetoothAddress blueAddress = null; // 藍芽裝置地址
+        Stream peerStream = null; // 資料流
 
         public Form1()
         {
+            InitializeComponent();
+            radio = BluetoothRadio.Default; // 獲取預設藍芽裝置
+            radio.Mode = RadioMode.Connectable; // 允許藍芽可以被搜尋到
         }
 
         private void btnSearchBluetooth_Click(object sender, EventArgs e)
