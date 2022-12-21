@@ -31,6 +31,15 @@ namespace BluetoothTester
 
         private void btnSearchBluetooth_Click(object sender, EventArgs e)
         {
+            listBluetooth.Items.Clear();
+            devices = client.DiscoverDevices(500); // 開始搜尋藍芽裝置
+            foreach (BluetoothDeviceInfo deviceInfo in devices)
+            {
+                Console.WriteLine(deviceInfo.DeviceAddress);
+                Console.WriteLine(deviceInfo.DeviceName);
+                listBluetooth.Items.Add("[" + deviceInfo.DeviceAddress + "] " + deviceInfo.DeviceName);
+                //blueAddress = item.DeviceAddress;
+            }
         }
 
         private void btnLinkStart_Click(object sender, EventArgs e)
