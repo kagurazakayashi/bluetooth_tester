@@ -44,6 +44,24 @@ namespace BluetoothTester
 
         private void btnLinkStart_Click(object sender, EventArgs e)
         {
+            int i = 0;
+            foreach (BluetoothDeviceInfo deviceInfo in devices)
+            {
+                if (i == listBluetooth.SelectedIndex)
+                {
+                    blueAddress = deviceInfo.DeviceAddress;
+                    break;
+                }
+                i++;
+            }
+            if (blueAddress != null)
+            {
+                BluetoothEndPoint ep = new BluetoothEndPoint(blueAddress, BluetoothService.SerialPort);
+                Console.WriteLine("正在连接");
+                client.Connect(ep); // 配对
+                Console.WriteLine("连接成功！");
+                Stream peerStream = client.GetStream(); // 建立資料流
+            }
         }
 
         private void btnSent_Click(object sender, EventArgs e)
