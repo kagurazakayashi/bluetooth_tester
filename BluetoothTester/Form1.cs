@@ -66,6 +66,13 @@ namespace BluetoothTester
 
         private void btnSent_Click(object sender, EventArgs e)
         {
+            if (client.Connected)
+            {
+                string str = txtMessage.Text;
+                byte[] decBytes = Encoding.ASCII.GetBytes(str);
+                peerStream.Write(decBytes, 0, str.Length); // 发送指令
+                Console.WriteLine("发送成功！");
+            }
         }
     }
 }
